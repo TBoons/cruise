@@ -176,7 +176,6 @@ public class cruiseControl extends JFrame{
             ss.setCurrentSpeed(-100);
         }
     }
-    
     public void cruiseOnOff(boolean overrideStatus){
         if( ss.getCruiseOnOffStatus() == "off" && ss.getIgnitionStatus() == "on" && !overrideStatus ){ //only turn on when engine is on
             //Turn on
@@ -186,12 +185,12 @@ public class cruiseControl extends JFrame{
             ss.setCruiseOnOffStatus("off");
         }
     }
-    
     public void gasPedalPressed(){
         if( ss.getIgnitionStatus() == "on" )
             ss.setCurrentSpeed(pedalIncrement);
     }
     public void brakePedalPressed(){
+       cruiseOnOff( true );//Brake Pedal PRessed. Turn off cruise
        ss.setCurrentSpeed(-pedalIncrement);
     }
 }
