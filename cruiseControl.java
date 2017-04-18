@@ -15,8 +15,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class cruiseControl extends JFrame{
-    private JTextField item1;
-    private JTextField item2;
     private JTextField currentSpeed;
     private JLabel currentSpeedLabel;
     private final int pedalIncrement = 5;
@@ -38,12 +36,6 @@ public class cruiseControl extends JFrame{
         GridBagConstraints c = new GridBagConstraints();
         
         systemStatus ss = new systemStatus();
-        
-        //item1 = new JTextField(10);
-        //add(item1);
-        
-        //item2 = new JTextField("Enter text here");
-        //add(item2);
         
         c.gridx = 0;
         c.gridy = 0;
@@ -90,9 +82,6 @@ public class cruiseControl extends JFrame{
         
         thehandler handler = new thehandler();
         
-        //item1.addActionListener(handler);
-        //item2.addActionListener(handler);
-        //currentSpeed.addActionListener(handler);
         ignitionButton.addActionListener(handler);
         cruiseOnOffButton.addActionListener(handler);
         gasPedal.addActionListener(handler);
@@ -184,6 +173,7 @@ public class cruiseControl extends JFrame{
             //Turn off
             ss.setIgnitionStatus("off");
             cruiseOnOff( true );//Car is off... Turn off Cruise Control
+            ss.setCurrentSpeed(-100);
         }
     }
     
@@ -198,7 +188,8 @@ public class cruiseControl extends JFrame{
     }
     
     public void gasPedalPressed(){
-        ss.setCurrentSpeed(pedalIncrement);
+        if( ss.getIgnitionStatus() == "on" )
+            ss.setCurrentSpeed(pedalIncrement);
     }
     public void brakePedalPressed(){
        ss.setCurrentSpeed(-pedalIncrement);
